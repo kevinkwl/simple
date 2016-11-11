@@ -26,13 +26,23 @@ public class App extends BinaryExpr {
 
     @Override
     public TypeResult typecheck(TypeEnv E) throws TypeError {
-        // TODO
-        return null;
+        TypeResult rRes = r.typecheck(E);
+        Substitution s1 = rRes.s;
+        Type t1 = rRes.t;
+        TypeVar t2 = new TypeVar(false);    //TODO: default false ???
+
+        TypeResult lRes = l.typecheck(rRes.s.compose(E));
+        Substitution s2 = lRes.s;
+        Type t = lRes.t;
+
+        Substitution s3 = t.unify(new ArrowType(t1, t2));
+        return TypeResult.of(s3.compose(s2.compose(s1)), s3.apply(t2));
     }
 
     @Override
     public Value eval(State s) throws RuntimeError {
-        // TODO
+        FunValue lval = (FunValue) l.eval(s);
+
         return null;
     }
 }

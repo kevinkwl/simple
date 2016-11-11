@@ -26,8 +26,20 @@ public class Cond extends Expr {
 
     @Override
     public TypeResult typecheck(TypeEnv E) throws TypeError {
-        // TODO
-        return null;
+        TypeResult e1Res = e1.typecheck(E);
+        Substitution s1 = e1Res.s;
+        Substitution s2 = e1Res.t.unify(Type.BOOL);
+
+        s2 = s2.compose(s1);
+
+        TypeResult e2Res = e2.typecheck(s2.compose(E));
+        s2 = e2Res.s.compose(s2);
+
+        TypeResult e3Res = e3.typecheck(s2.compose(E));
+        s2 = e3Res.s.compose(s2);
+        Substitution s3 = e3Res.t.unify(e3Res.s.apply(e2Res.t));
+
+        return TypeResult.of(s3.compose(s2), s3.apply(e3Res.t));
     }
 
     @Override

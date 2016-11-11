@@ -5,10 +5,7 @@ import simpl.interpreter.RuntimeError;
 import simpl.interpreter.State;
 import simpl.interpreter.Value;
 import simpl.parser.Symbol;
-import simpl.typing.Type;
-import simpl.typing.TypeEnv;
-import simpl.typing.TypeError;
-import simpl.typing.TypeResult;
+import simpl.typing.*;
 
 public class Name extends Expr {
 
@@ -24,8 +21,11 @@ public class Name extends Expr {
 
     @Override
     public TypeResult typecheck(TypeEnv E) throws TypeError {
-        // TODO
-        return null;
+        Type t = E.get(x);
+        if (t == null)
+            throw new TypeError("Undefined Identifier");
+        else
+            return TypeResult.of(Substitution.IDENTITY, t);
     }
 
     @Override

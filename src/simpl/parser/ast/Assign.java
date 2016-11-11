@@ -23,8 +23,17 @@ public class Assign extends BinaryExpr {
 
     @Override
     public TypeResult typecheck(TypeEnv E) throws TypeError {
-        // TODO
-        return null;
+        TypeResult rRes = r.typecheck(E);
+        Substitution s1 = rRes.s;
+        Type t1 = rRes.t;
+
+        TypeResult lRes = l.typecheck(s1.compose(E));
+        Substitution s2 = lRes.s;
+        Type t2 = lRes.t;
+
+        Substitution s3 = t2.unify(new RefType(t1));
+
+        return TypeResult.of(s3.compose(s2.compose(s1)), Type.UNIT);
     }
 
     @Override
