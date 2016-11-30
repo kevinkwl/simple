@@ -1,5 +1,6 @@
 package simpl.interpreter;
 
+
 public class ConsValue extends Value {
 
     public final Value v1, v2;
@@ -10,13 +11,20 @@ public class ConsValue extends Value {
     }
 
     public String toString() {
-        // TODO
-        return null;
+        return "list@" + length();
+    }
+
+    public int length() {
+        if (v2 instanceof NilValue)
+            return 1;
+        else
+            return 1 + ((ConsValue)v2).length();
     }
 
     @Override
     public boolean equals(Object other) {
-        // TODO
+        if (other instanceof ConsValue)
+            return v1.equals(((ConsValue) other).v1) && v2.equals(((ConsValue) other).v2);
         return false;
     }
 }

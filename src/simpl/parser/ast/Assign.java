@@ -31,14 +31,17 @@ public class Assign extends BinaryExpr {
         Substitution s2 = lRes.s;
         Type t2 = lRes.t;
 
-        Substitution s3 = t2.unify(new RefType(t1));
+        Substitution s3 = t2.unify(new RefType(s2.apply(t1)));
 
         return TypeResult.of(s3.compose(s2.compose(s1)), Type.UNIT);
     }
 
     @Override
     public Value eval(State s) throws RuntimeError {
-        // TODO
-        return null;
+        RefValue rv = (RefValue) l.eval(s);
+        Value v = r.eval(s);
+
+        s.M.put(rv.p, v);
+        return Value.UNIT;
     }
 }

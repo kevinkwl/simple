@@ -30,7 +30,10 @@ public class Not extends UnaryExpr {
 
     @Override
     public Value eval(State s) throws RuntimeError {
-        // TODO
-        return null;
+        BoolValue bv = (BoolValue) e.eval(s);
+        if (bv.equals(Value.TRUE))
+            return Value.FALSE;
+        else
+            return Value.TRUE;
     }
 }

@@ -40,7 +40,9 @@ public class Loop extends Expr {
 
     @Override
     public Value eval(State s) throws RuntimeError {
-        // TODO
-        return null;
+        while (e1.eval(s).equals(Value.TRUE)) {
+            e2.eval(s);
+        }
+        return Value.UNIT;
     }
 }

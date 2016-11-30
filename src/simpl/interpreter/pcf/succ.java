@@ -15,7 +15,20 @@ import simpl.typing.TypeResult;
 public class succ extends FunValue {
 
     public succ() {
-        // TODO
-        super(null, null, null);
+        super(Env.empty, Symbol.symbol("__succ__x"), new Expr() {
+            @Override
+            public TypeResult typecheck(TypeEnv E) throws TypeError {
+                return null;
+            }
+
+            @Override
+            public Value eval(State s) throws RuntimeError {
+                Value v = s.E.get(Symbol.symbol("__succ__x"));
+                if (v instanceof IntValue) {
+                    return new IntValue(((IntValue) v).n + 1);
+                }
+                throw new RuntimeError("succ can only be applied on int values");
+            }
+        });
     }
 }

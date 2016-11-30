@@ -44,7 +44,11 @@ public class Cond extends Expr {
 
     @Override
     public Value eval(State s) throws RuntimeError {
-        // TODO
-        return null;
+        BoolValue bv = (BoolValue) e1.eval(s);
+        if (bv.equals(Value.TRUE)) {
+            return e2.eval(s);
+        } else {
+            return e3.eval(s);
+        }
     }
 }

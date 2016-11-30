@@ -15,7 +15,20 @@ import simpl.typing.TypeResult;
 public class hd extends FunValue {
 
     public hd() {
-        // TODO
-        super(null, null, null);
+        super(Env.empty, Symbol.symbol("__list__hd"), new Expr() {
+            @Override
+            public TypeResult typecheck(TypeEnv E) throws TypeError {
+                return null;
+            }
+
+            @Override
+            public Value eval(State s) throws RuntimeError {
+                Value v = s.E.get(Symbol.symbol("__list__hd"));
+                if (v instanceof ConsValue) {
+                    return ((ConsValue) v).v1;
+                }
+                throw new RuntimeError("hd can only be applied on lists.");
+            }
+        });
     }
 }
