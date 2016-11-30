@@ -1,9 +1,6 @@
 package simpl.parser.ast;
 
-import simpl.interpreter.RecValue;
-import simpl.interpreter.RuntimeError;
-import simpl.interpreter.State;
-import simpl.interpreter.Value;
+import simpl.interpreter.*;
 import simpl.parser.Symbol;
 import simpl.typing.*;
 
@@ -30,7 +27,12 @@ public class Name extends Expr {
 
     @Override
     public Value eval(State s) throws RuntimeError {
-        // TODO
-        return null;
+        Value v = s.E.get(x);
+        if (v == null)
+            throw new NameError(x);
+        if (v instanceof RecValue) {
+            return ((RecValue) v).e.eval(s);
+        }
+        return v;
     }
 }

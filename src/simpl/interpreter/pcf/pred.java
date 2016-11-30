@@ -15,7 +15,22 @@ import simpl.typing.TypeResult;
 public class pred extends FunValue {
 
     public pred() {
-        // TODO
-        super(null, null, null);
+        super(Env.empty, Symbol.symbol("__pred__x"), new Expr() {
+            @Override
+            public TypeResult typecheck(TypeEnv E) throws TypeError {
+                return null;
+            }
+
+            @Override
+            public Value eval(State s) throws RuntimeError {
+                Value v = s.E.get(Symbol.symbol("__pred__x"));
+                if (v instanceof IntValue) {
+//                    if (v.equals(Value.ZERO))
+//                        throw new RuntimeError("pred on zero is undefined");
+                    return new IntValue(((IntValue) v).n - 1);
+                }
+                throw new RuntimeError("pred can only be applied on int values");
+            }
+        });
     }
 }

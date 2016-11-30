@@ -1,9 +1,6 @@
 package simpl.parser.ast;
 
-import simpl.interpreter.IntValue;
-import simpl.interpreter.RuntimeError;
-import simpl.interpreter.State;
-import simpl.interpreter.Value;
+import simpl.interpreter.*;
 
 public class Div extends ArithExpr {
 
@@ -17,7 +14,11 @@ public class Div extends ArithExpr {
 
     @Override
     public Value eval(State s) throws RuntimeError {
-        // TODO
-        return null;
+        IntValue iv1 = (IntValue) l.eval(s);
+        IntValue iv2 = (IntValue) r.eval(s);
+
+        if (iv2.equals(Value.ZERO))
+            throw new ZeroDivisionError();
+        return new IntValue(iv1.n / iv2.n);
     }
 }

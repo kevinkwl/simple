@@ -42,7 +42,7 @@ public class App extends BinaryExpr {
     @Override
     public Value eval(State s) throws RuntimeError {
         FunValue lval = (FunValue) l.eval(s);
-
-        return null;
+        Value rval = r.eval(s);
+        return lval.e.eval(State.of(new Env(lval.E, lval.x, rval), s.M, s.p));
     }
 }

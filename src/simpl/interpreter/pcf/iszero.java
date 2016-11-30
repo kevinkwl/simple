@@ -16,7 +16,19 @@ import simpl.typing.TypeResult;
 public class iszero extends FunValue {
 
     public iszero() {
-        // TODO
-        super(null, null, null);
+        super(Env.empty, Symbol.symbol("__iszero__x"), new Expr() {
+            @Override
+            public TypeResult typecheck(TypeEnv E) throws TypeError {
+                return null;
+            }
+
+            @Override
+            public Value eval(State s) throws RuntimeError {
+                Value v = s.E.get(Symbol.symbol("__iszero__x"));
+                if (v instanceof IntValue)
+                    return new BoolValue(v.equals(Value.ZERO));
+                throw new RuntimeError("iszero can only be applied on int values");
+            }
+        });
     }
 }

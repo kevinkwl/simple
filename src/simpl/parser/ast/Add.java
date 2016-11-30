@@ -1,9 +1,6 @@
 package simpl.parser.ast;
 
-import simpl.interpreter.IntValue;
-import simpl.interpreter.RuntimeError;
-import simpl.interpreter.State;
-import simpl.interpreter.Value;
+import simpl.interpreter.*;
 
 public class Add extends ArithExpr {
 
@@ -19,6 +16,7 @@ public class Add extends ArithExpr {
     public Value eval(State s) throws RuntimeError {
         IntValue lval = (IntValue) l.eval(s);
         IntValue rval = (IntValue) r.eval(s);
+
         return new IntValue(lval.n + rval.n);
     }
 }
