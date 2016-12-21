@@ -25,7 +25,7 @@ public final class PairType extends Type {
 
             return s2.compose(s1);
         }
-        return null;
+        throw new TypeMismatchError();
     }
 
     @Override

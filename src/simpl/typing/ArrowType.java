@@ -21,8 +21,6 @@ public final class ArrowType extends Type {
         }
         if (t instanceof ArrowType) {
             Substitution s1 = this.t1.unify(((ArrowType) t).t1);
-            s1.apply(this.t2);
-
             Substitution s2 = s1.apply(this.t2).unify(s1.apply(((ArrowType) t).t2));
 
             return s2.compose(s1);

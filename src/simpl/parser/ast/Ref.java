@@ -25,9 +25,9 @@ public class Ref extends UnaryExpr {
     @Override
     public Value eval(State s) throws RuntimeError {
         Value v = e.eval(s);
-        Int p = s.p;
-        s.M.put(p.get(), v);
-        s.p.set(p.get() + 1);
-        return new RefValue(p.get());
+        int p = s.p.get();
+        s.M.put(p, v);
+        s.p.set(p + 1);
+        return new RefValue(p);
     }
 }

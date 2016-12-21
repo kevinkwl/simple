@@ -21,7 +21,7 @@ public final class RefType extends Type {
         if (t instanceof RefType) {
             return this.t.unify(((RefType) t).t);
         }
-        return null;
+        throw new TypeMismatchError();
     }
 
     @Override

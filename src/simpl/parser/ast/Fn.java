@@ -37,6 +37,6 @@ public class Fn extends Expr {
 
     @Override
     public Value eval(State s) throws RuntimeError {
-        return new FunValue(s.E.clone(), x, e);
+        return new FunValue(s.E, x, e);
     }
 }
