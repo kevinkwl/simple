@@ -1,0 +1,7 @@
+let x = lazy (1 / 0) in
+    let y = lazy (2 / 1) in
+        let ite = fn e => fn e1 => fn e2 => if e then (force e1) else (force e2) in
+            ite true y x
+        end
+    end
+end

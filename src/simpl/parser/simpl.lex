@@ -60,6 +60,7 @@ Whitespace = {LineTerm}|[ \t\f]
     "not"     { return token(NOT); }
     "andalso" { return token(ANDALSO); }
     "orelse"  { return token(ORELSE); }
+    "lazy"    { return token(LAZY); }
     
     "+"  { return token(ADD); }
     "-"  { return token(SUB); }

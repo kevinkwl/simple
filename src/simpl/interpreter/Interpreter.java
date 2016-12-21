@@ -40,6 +40,7 @@ public class Interpreter {
     }
 
     public static void main(String[] args) {
+        interpret("doc/examples/lazy.spl");
         interpret("doc/examples/poly.spl");
         interpret("doc/examples/gc.spl");
         interpret("doc/examples/plus.spl");

@@ -16,6 +16,9 @@ public class DefaultTypeEnv extends TypeEnv {
         Symbol iszero = Symbol.symbol("iszero");
         Symbol pred = Symbol.symbol("pred");
         Symbol succ = Symbol.symbol("succ");
+        Symbol force = Symbol.symbol("force");
+
+
 
         TypeVar t = new TypeVar(false);
         ArrowType fst_t = new ArrowType(new PairType(t, new TypeVar(false)), t);
@@ -40,6 +43,10 @@ public class DefaultTypeEnv extends TypeEnv {
         E = TypeEnv.of(E, iszero, iszero_t);
         E = TypeEnv.of(E, pred, pred_t);
         E = TypeEnv.of(E, succ, succ_t);
+
+        t = new TypeVar(false);
+        ArrowType force_t = new ArrowType(t, t);
+        E = TypeEnv.of(E, force, force_t);
 
     }
 
