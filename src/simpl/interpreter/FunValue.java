@@ -23,4 +23,8 @@ public class FunValue extends Value {
     public boolean equals(Object other) {
         return false;
     }
+
+    public Env getE() {
+        return E;
+    }
 }

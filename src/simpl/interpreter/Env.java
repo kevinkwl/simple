@@ -40,4 +40,12 @@ public class Env {
         Env cloned = E.clone();
         return new Env(cloned, x, v);
     }
+
+    public Value getValue() {
+        return v;
+    }
+
+    public Env getEnv() {
+        return E;
+    }
 }

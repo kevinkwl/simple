@@ -19,4 +19,12 @@ public class PairValue extends Value {
             return v1.equals(((PairValue) other).v1) && v2.equals(((PairValue) other).v2);
         return false;
     }
+
+    public Value getV1() {
+        return v1;
+    }
+
+    public Value getV2() {
+        return v2;
+    }
 }

@@ -43,6 +43,11 @@ public class App extends BinaryExpr {
     public Value eval(State s) throws RuntimeError {
         FunValue lval = (FunValue) l.eval(s);
         Value rval = r.eval(s);
-        return lval.e.eval(State.of(new Env(lval.E, lval.x, rval), s.M, s.p));
+
+        // save env
+        s.M.pushEnv(s.E);
+        Value result = lval.e.eval(State.of(new Env(lval.E, lval.x, rval), s.M, s.p));
+        s.M.popEnv();
+        return result;
     }
 }

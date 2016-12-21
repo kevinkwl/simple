@@ -27,4 +27,12 @@ public class ConsValue extends Value {
             return v1.equals(((ConsValue) other).v1) && v2.equals(((ConsValue) other).v2);
         return false;
     }
+
+    public Value getV1() {
+        return v1;
+    }
+
+    public Value getV2() {
+        return v2;
+    }
 }
