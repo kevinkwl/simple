@@ -5,10 +5,7 @@ import simpl.interpreter.RuntimeError;
 import simpl.interpreter.State;
 import simpl.interpreter.Value;
 import simpl.parser.Symbol;
-import simpl.typing.Type;
-import simpl.typing.TypeEnv;
-import simpl.typing.TypeError;
-import simpl.typing.TypeResult;
+import simpl.typing.*;
 
 public class Let extends Expr {
 
@@ -29,7 +26,10 @@ public class Let extends Expr {
     public TypeResult typecheck(TypeEnv E) throws TypeError {
         TypeResult e1Res = e1.typecheck(E);
 
-        TypeResult e2Res = e2.typecheck(TypeEnv.of(e1Res.s.compose(E), x, e1Res.t));
+        // let polymorphism
+        TypeScheme scm = TypeScheme.generateScheme(e1Res.t, E);
+
+        TypeResult e2Res = e2.typecheck(TypeEnv.of(e1Res.s.compose(E), x, scm));
 
         return TypeResult.of(e2Res.s.compose(e1Res.s), e2Res.t);
     }

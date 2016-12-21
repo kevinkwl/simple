@@ -2,6 +2,8 @@ package simpl.typing;
 
 import simpl.parser.Symbol;
 
+import java.util.Set;
+
 public class DefaultTypeEnv extends TypeEnv {
 
     private TypeEnv E;
@@ -44,5 +46,10 @@ public class DefaultTypeEnv extends TypeEnv {
     @Override
     public Type get(Symbol x) {
         return E.get(x);
+    }
+
+    public Set<TypeVar> getEnvUnsolved() {
+        Set<TypeVar> uns = E.getEnvUnsolved();
+        return uns;
     }
 }

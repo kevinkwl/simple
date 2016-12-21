@@ -1,5 +1,8 @@
 package simpl.typing;
 
+import java.util.HashSet;
+import java.util.Set;
+
 final class BoolType extends Type {
 
     protected BoolType() {
@@ -33,5 +36,11 @@ final class BoolType extends Type {
 
     public String toString() {
         return "bool";
+    }
+
+
+    @Override
+    public Set<TypeVar> unsolved() {
+        return new HashSet<>();
     }
 }

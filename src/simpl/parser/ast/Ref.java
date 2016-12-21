@@ -25,23 +25,24 @@ public class Ref extends UnaryExpr {
     @Override
     public Value eval(State s) throws RuntimeError {
         Value v = e.eval(s);
-        //int p = s.p.get();
-        int p = s.M.nextFree();
 
-        if (p == -1) {
-            s.M.gc(s.E);
-            p = s.M.nextFree();
-        }
-        if (p == -1) {
-            throw new RuntimeError("HeapOverFlowError: No enough space.");
-        }
+        // code for garbage collector
+//        int p = s.M.nextFree();
+//
+//        if (p == -1) {
+//            s.M.gc(s.E);
+//            p = s.M.nextFree();
+//        }
+//        if (p == -1) {
+//            throw new RuntimeError("HeapOverFlowError: No enough space.");
+//        }
+//        s.M.put(p, v);
+
+
+        // normal
+        int p = s.p.get();
         s.M.put(p, v);
-        //s.p.set(p);
-
-
-
-
-
+        s.p.set(p+1);
         return new RefValue(p);
     }
 }

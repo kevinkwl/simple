@@ -1,5 +1,7 @@
 package simpl.typing;
 
+import java.util.Set;
+
 public final class RefType extends Type {
 
     public Type t;
@@ -36,5 +38,10 @@ public final class RefType extends Type {
 
     public String toString() {
         return t + " ref";
+    }
+
+    @Override
+    public Set<TypeVar> unsolved() {
+        return t.unsolved();
     }
 }

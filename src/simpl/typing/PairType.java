@@ -1,5 +1,7 @@
 package simpl.typing;
 
+import java.util.Set;
+
 public final class PairType extends Type {
 
     public Type t1, t2;
@@ -40,5 +42,12 @@ public final class PairType extends Type {
 
     public String toString() {
         return "(" + t1 + " * " + t2 + ")";
+    }
+
+    @Override
+    public Set<TypeVar> unsolved() {
+        Set<TypeVar> s1 = t1.unsolved();
+        s1.addAll(t2.unsolved());
+        return s1;
     }
 }

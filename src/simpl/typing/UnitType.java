@@ -1,5 +1,8 @@
 package simpl.typing;
 
+import java.util.HashSet;
+import java.util.Set;
+
 final class UnitType extends Type {
 
     protected UnitType() {
@@ -33,5 +36,10 @@ final class UnitType extends Type {
 
     public String toString() {
         return "unit";
+    }
+
+    @Override
+    public Set<TypeVar> unsolved() {
+        return new HashSet<>();
     }
 }

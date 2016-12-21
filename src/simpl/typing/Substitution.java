@@ -2,6 +2,9 @@ package simpl.typing;
 
 import simpl.parser.Symbol;
 
+import java.util.Set;
+import java.util.function.Predicate;
+
 public abstract class Substitution {
 
     public abstract Type apply(Type t);
@@ -54,6 +57,20 @@ public abstract class Substitution {
             public Type get(Symbol x) {
                 return apply(E.get(x));
             }
+
+            public Set<TypeVar> getEnvUnsolved() {
+                Set<TypeVar> uns = E.getEnvUnsolved();
+
+                uns.removeIf(new Predicate<TypeVar>() {
+                    @Override
+                    public boolean test(TypeVar typeVar) {
+                        return !(apply(typeVar) instanceof TypeVar);
+                    }
+                });
+                return uns;
+            }
         };
+
+
     }
 }

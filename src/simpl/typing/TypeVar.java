@@ -2,6 +2,9 @@ package simpl.typing;
 
 import simpl.parser.Symbol;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class TypeVar extends Type {
 
     private static int tvcnt = 0;
@@ -51,5 +54,12 @@ public class TypeVar extends Type {
         } else {
             return this;
         }
+    }
+
+    @Override
+    public Set<TypeVar> unsolved() {
+        Set<TypeVar> s1 = new HashSet<>();
+        s1.add(this);
+        return s1;
     }
 }
