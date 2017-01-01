@@ -18,7 +18,7 @@ public class ParserTest {
     }
 
     public static void main(String[] argv) {
-        parse("doc/examples/plus.spl");
+        parse("doc/examples/lazy.spl");
         parse("doc/examples/factorial.spl");
         parse("doc/examples/gcd1.spl");
         parse("doc/examples/gcd2.spl");
